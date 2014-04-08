@@ -1,0 +1,8 @@
+\pset null '\\N'
+\set HISTSIZE 5000
+\timing
+\set G '\\x\\g\\x'
+\set PROMPT1 '%/%R%x%# '
+\set sp 'set search_path to '
+
+\i ~/.psqlrc.local

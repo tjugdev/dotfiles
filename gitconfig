@@ -1,0 +1,29 @@
+[user]
+    name = Tristan Jugdev
+[push]
+    default = upstream
+[apply]
+    whitespace = fix
+[alias]
+    co = checkout
+    st = status
+    ci = commit
+    br = branch
+    df = diff
+    rb = rebase
+    marked-unchanged = !git ls-files -v | grep '^[a-z]'
+    mu = !git ls-files -v | grep '^[a-z]'
+    assume-unchanged = update-index --assume-unchanged
+    au = update-index --assume-unchanged
+    no-assume-unchanged = update-index --no-assume-unchanged
+    nau = update-index --no-assume-unchanged
+    undo = reset --soft HEAD~1
+    reci = commit -c ORIG_HEAD
+    head = !git reset HEAD . && git checkout -- .
+[color]
+    ui = true
+[rerere]
+    enable = true
+
+[include]
+    path=~/.gitconfig.local
