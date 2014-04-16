@@ -68,6 +68,8 @@ nnoremap ,= 5<C-W>>
 nnoremap ,] 5<C-W>+
 nnoremap ,[ 5<C-W>-
 
+nnoremap ,, ,
+
 " Saving shortcuts
 cmap w!! w !sudo tee % >/dev/null
 cnoreabbrev <expr> %% IsEditCommand() ? expand('%:p:h') : '%%'

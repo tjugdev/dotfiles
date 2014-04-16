@@ -1,8 +1,15 @@
+\set QUIET ON
+
 \pset null '\\N'
 \set HISTSIZE 5000
-\timing
-\set G '\\x\\g\\x'
 \set PROMPT1 '%/%R%x%# '
-\set sp 'set search_path to '
+\timing
 
+\set QUIET OFF
+
+\set G '\\x\\g\\x'
+\set ssp 'SET search_path TO'
+\set sp 'SHOW search_path'
+
+-- Source local .psqrlc
 \i ~/.psqlrc.local

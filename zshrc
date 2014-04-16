@@ -35,8 +35,11 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git)
 
 HISTSIZE=50000
-source $HOME/.zshrc.local
-export PSQL_EDITOR='vim -c"set syntax=sql"'
+
+if [ -e $HOME/.zshrc.local ] ; then
+    source $HOME/.zshrc.local
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # Disable command corrections
@@ -44,7 +47,7 @@ unsetopt correct_all
 
 #########################################################################################
 # Turn on incremental search with CTRL-R
-bindkey \\C-R history-incremental-search-backward 
+bindkey \\C-R history-incremental-search-backward
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
 
@@ -56,7 +59,10 @@ alias grb='git rebase'
 alias gbr='git branch'
 alias grl='git reflog --max-count=30'
 
-PATH=$PATH:$HOME/.rvm/bin:$HOME/bin # Add RVM to PATH for scripting
+alias v='vim'
+
+export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin
+export PSQL_EDITOR='vim -c"set syntax=sql"'
 
 function w() {
     [ $# -eq 0 ] && /usr/bin/w || which $@
