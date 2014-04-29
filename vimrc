@@ -68,6 +68,8 @@ nnoremap ,= 5<C-W>>
 nnoremap ,] 5<C-W>+
 nnoremap ,[ 5<C-W>-
 
+nnoremap ,d :bd<CR>
+
 nnoremap ,, ,
 
 " Saving shortcuts
@@ -90,6 +92,8 @@ vnoremap <silent> y y`>
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 nnoremap gV `[v`]
+
+nnoremap <Leader>? :Gblame<CR>:silent !git show <C-r><C-w><CR><C-l>:q<CR>
 
 if has("autocmd")
     aug assorted_niceness
