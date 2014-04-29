@@ -54,9 +54,10 @@ bindkey '\e[4~' end-of-line
 alias cal='cal -3'
 alias soz='source ~/.zshrc'
 
-alias gci='git commit'
+alias gci='git commit -v'
 alias grb='git rebase'
 alias gbr='git branch'
+alias gdf='git diff --name-only'
 alias grl='git reflog --max-count=30'
 
 alias v='vim'
