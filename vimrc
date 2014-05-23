@@ -95,6 +95,9 @@ nnoremap gV `[v`]
 
 nnoremap <Leader>? :Gblame<CR>:silent !git show <C-r><C-w><CR><C-l>:q<CR>
 
+" :Gb is ambigous: Gblame, Gbrowse.  I want it to be Gblame
+com! Gb Gblame
+
 if has("autocmd")
     aug assorted_niceness
         au!

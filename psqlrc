@@ -1,6 +1,8 @@
 \set QUIET ON
 
 \pset null '\\N'
+\pset fieldsep ,
+
 \set HISTSIZE 5000
 \set PROMPT1 '%/%R%x%# '
 \timing
@@ -10,6 +12,9 @@
 \set G '\\x\\g\\x'
 \set ssp 'SET search_path TO'
 \set sp 'SHOW search_path'
+
+-- Make :q quit, since apparently everything is vim
+\set q '\\q'
 
 -- Source local .psqrlc
 \i ~/.psqlrc.local
