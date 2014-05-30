@@ -80,18 +80,27 @@ com! W w
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :wq<CR>
 
+" noremap <Space> <Leader>c<Space> doesn't work since the rhs is a custom binding
+" map <Space> <Leader>c<Space> doesn't work since its a recursive definition
+"
+" So we need to call the NERDComment function ourself
+nnoremap <silent> <Space> :call NERDComment("n", "Toggle")<CR>
+vnoremap <silent> <Space> :call NERDComment("x", "Toggle")<CR>
+
 " Misc helpful shortcuts
 map <F12> :w !diff % -<CR>
-nmap <Space> <Leader>ci
-nnoremap <Leader>ev :sp $MYVIMRC<cr>
+nnoremap <Leader>ev :sp $MYVIMRC<CR>
+nnoremap <Leader>el :sp ~/.vimrc.local<CR>
 nnoremap <silent> <CR> :noh<CR>
 nnoremap n nzz
-vmap <Space> <Leader>cc
 vnoremap / <Esc>/\%V
 vnoremap <silent> y y`>
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 nnoremap gV `[v`]
+
+" Make Y behave more logically
+nnoremap Y y$
 
 nnoremap <Leader>? :Gblame<CR>:silent !git show <C-r><C-w><CR><C-l>:q<CR>
 
@@ -104,11 +113,17 @@ if has("autocmd")
         " Jump to last known position when reopening a file
         au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
             \| exe "normal! g'\"" | endif
-        " Source various files on save
-        au BufWritePost $MYVIMRC :so $MYVIMRC
+
+        " Source vimrc/vimrc.local on save
+        au BufWritePost $MYVIMRC so %
+        au BufWritePost ~/.vimrc.local so %
+
+        " Spellcheck commit messages
+        au BufReadPost */.git/COMMIT_EDITMSG set spell
 
         au WinEnter * set number
         au WinLeave * set nonumber
+
         au FileType ruby,html set tabstop=2 | set shiftwidth=2 | set softtabstop=2
     aug END
 endif
