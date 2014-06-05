@@ -102,7 +102,7 @@ nnoremap gV `[v`]
 " Make Y behave more logically
 nnoremap Y y$
 
-nnoremap <Leader>? :Gblame<CR>:silent !git show <C-r><C-w><CR><C-l>:q<CR>
+nnoremap <Leader>? :Gblame<CR>:silent :Git show <C-r><C-w><CR><C-l>:q<CR>
 
 " :Gb is ambigous: Gblame, Gbrowse.  I want it to be Gblame
 com! Gb Gblame
