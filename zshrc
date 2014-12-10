@@ -60,10 +60,18 @@ alias grl='git reflog --max-count=30'
 alias gdc='git diff --cached'
 
 alias v='vim'
+alias ka='killall'
+alias gps='ps aux | grep'
+alias ls='ls --group-directories-first --color=tty'
+
+alias gsu='git submodule update --init --recursive'
 
 export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin
 export PSQL_EDITOR='vim -c"set syntax=sql"'
+export EDITOR=vim
 
 function w() {
     [ $# -eq 0 ] && /usr/bin/w || which $@
 }
+
+unalias ag

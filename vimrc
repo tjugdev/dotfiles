@@ -80,6 +80,8 @@ com! W w
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :wq<CR>
 
+nnoremap Q <Nop>
+
 " noremap <Space> <Leader>c<Space> doesn't work since the rhs is a custom binding
 " map <Space> <Leader>c<Space> doesn't work since its a recursive definition
 "
@@ -124,7 +126,7 @@ if has("autocmd")
         au WinEnter * set number
         au WinLeave * set nonumber
 
-        au FileType ruby,html set tabstop=2 | set shiftwidth=2 | set softtabstop=2
+        au FileType ruby,html setl tabstop=2 | setl shiftwidth=2 | setl softtabstop=2
     aug END
 endif
 
