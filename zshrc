@@ -32,7 +32,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git debian npm zsh-syntax-highlighting node arty docker)
 
 HISTSIZE=50000
 
@@ -57,21 +57,64 @@ alias soz='source ~/.zshrc'
 alias grb='git rebase'
 alias gdf='git diff --name-only'
 alias grl='git reflog --max-count=30'
+alias gsu='git submodule update --init --recursive'
+alias gsh='git show'
 alias gdc='git diff --cached'
 
 alias v='vim'
 alias ka='killall'
 alias gps='ps aux | grep'
 alias ls='ls --group-directories-first --color=tty'
+alias sudo="sudo " # expand sudo aliases
 
-alias gsu='git submodule update --init --recursive'
+# Take screenshot of selected area
+alias scr="gnome-screenshot -a 2>/dev/null"
+
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+function lanip() {
+    local dev=${1:-eth0}
+    ip -o -f inet addr show $dev | sed 's_.*inet \(.*\)/.*_\1_'
+}
+
+# Debian plugin uses ag for apt-get upgrade.  I use ag for searching.
+unalias ag
 
 export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin
 export PSQL_EDITOR='vim -c"set syntax=sql"'
 export EDITOR=vim
+#export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
 function w() {
     [ $# -eq 0 ] && /usr/bin/w || which $@
 }
 
-unalias ag
+function historystats() {
+    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" \
+            | column -c3 -s " " -t | sort -nr | nl |  head -n10
+}
+
+# Dump colors supported by terminal
+function listcolors() {
+    for i in $(seq 0 $(tput colors) ) ; do
+        tput setaf $i
+        echo -n "\t█ $i"
+        [ $(($i % 10)) -eq 0 ] && echo
+    done
+    tput setaf 15
+    echo
+}
+
+function google {
+    local urlencoded=$(echo -n "${(j: :)@}" | perl -MURI::Escape -ne 'print uri_escape($_)')
+    xdg-open "https://www.google.com/search?q=${urlencoded}"
+    sleep 1
+    echo
+}
+
+function ts2date {
+    local factor=1
+    if [[ $1 -gt 9999999999 ]] ; then
+        factor=1000
+    fi
+    date -d@$(($1 / $factor))
+}
